@@ -1,0 +1,14 @@
+.group-info {
+    background: lightgreen; 
+}
+
+.members {
+    height: 200px; 
+    padding: 1em; 
+}
+
+.members img {
+    margin-top: 1em; 
+    height: 150px; 
+    width: 90%; 
+}
