@@ -2,15 +2,16 @@
 const apiKey = config.MY_KEY; 
 //base url 
 const muGroupUrl = 'https://api.meetup.com/Sarasota-JavaScript-Meetup'; 
-//url for getAllAttendess()
-const membersUrl = muGroupUrl + "/members?&sign=true&photo-host=public&page=9&key=" + apiKey; 
 //url for getGroup()
 const groupUrl = muGroupUrl + "?&sign=true&photo-host=public&key=" + apiKey; 
+//url for getMembers()
+const membersUrl = muGroupUrl + "/members?&sign=true&photo-host=public&only=name,photo&key=" + apiKey; 
+
 
 
 $(function() {
-    getAllAttendees(); 
     getGroup(); 
+    getMembers(); 
 });
 
 function getGroup() {
@@ -20,34 +21,39 @@ function getGroup() {
         jsonp: 'callback', 
         dataType: 'jsonp', 
     }).done((res) => {
-        console.log(res.data);
         let desc = res.data.description; 
         $('.group-info').html(desc); 
     })
 }
 
-function getAllAttendees() {
+
+function getMembers() {
+     
+    const imgError = 'http://via.placeholder.com/150x200?text=No+Image'; 
+    
     $.ajax({ 
         type:"GET", 
         url: membersUrl, 
         jsonp: 'callback', 
         dataType: 'jsonp',
-    }).done((res) => {
-            console.log(membersUrl);    
-            let people = res.data;
-            console.log(people); 
+        success: (res) => {
+            console.log(res.data);
             let output = ''; 
-            $.each(people, (index, person) => {
-                output += `
-                      <div class="col-sm-3 col-md-4 members text-center">
-                        <div>
-                            <img src="${person.photo.photo_link}" >
-                            <h5>${person.name}</h5>
-                        </div>
-                      </div>
-                `;
-            })
-              //push all output to DOM in one go. 
-            $('#members').html(output);
-    });
+            $.each(res.data, (index, person) => {   
+                output += `    
+                    <div class="col-sm-4 members text-center">
+                            <h5>${ person.name }</h5>
+                            <img src=${ (Object.keys(person).length > 1) ? person.photo.photo_link : imgError } >  
+                    </div>     
+                `; 
+            })  
+            $('#members').html(output);      
+        }         
+    });          
+             
 }
+              
+
+
+
+

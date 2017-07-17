@@ -4,11 +4,10 @@
 
 .members {
     height: 200px; 
-    padding: 1em; 
+    margin: 10px 0;  
 }
 
 .members img {
-    margin-top: 1em; 
     height: 150px; 
-    width: 90%; 
+    width: 60%; 
 }

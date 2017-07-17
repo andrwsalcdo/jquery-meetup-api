@@ -1,6 +1,6 @@
 ## jquery Meetup 
 
-Used jQuery & the Meetup API to display some members of a local Javascript Meetup Group. 
-Display the Member's photo and name, while displaying the description of the group. 
+Used jQuery & the Meetup API to display all members of a local Javascript Meetup Group. 
+Display the group's description with every member's name & photo.
 
 Wanted to review $ajax and jquery. 
